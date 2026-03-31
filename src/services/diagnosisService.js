@@ -73,11 +73,12 @@ A rule-based system produced this preliminary diagnosis:
 ${JSON.stringify(ruleBasedResult, null, 2)}
 
 Your task:
-1. Improve the wording of each condition name to be medically accurate and professional.
-2. Make each "suggestedNextSteps" item clear, specific, and actionable for the patient.
-3. Keep probability values as realistic percentage strings (e.g. "75%").
-4. Rank conditions from highest to lowest probability.
-5. Return ONLY a valid JSON object — no markdown, no explanation, no extra text.
+1. Analyze the symptoms and identify the most likely medical conditions. If the preliminary diagnosis is "Indeterminate", ignore it and create a completely fresh diagnosis.
+2. Provide medically accurate and professional names for each condition.
+3. Make each "suggestedNextSteps" item clear, specific, and actionable.
+4. Set highly realistic probability percentages for EACH condition strictly based on how strongly the symptoms match (e.g., "90%", "75%", "15%"). Do NOT simply output 40% every time.
+5. Return 2 to 3 possible conditions, ranked from highest to lowest probability.
+6. Return ONLY a valid JSON object — no markdown, no explanation, no extra text.
 
 Required JSON structure:
 {
@@ -92,7 +93,7 @@ Required JSON structure:
 
         try {
             const genAI = new GoogleGenerativeAI(apiKey);
-            const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+            const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
             const result = await model.generateContent(prompt);
             const rawText = result.response.text().trim();
