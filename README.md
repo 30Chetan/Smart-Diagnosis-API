@@ -6,6 +6,10 @@
   ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
   ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
   ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=google&logoColor=white)
+  
+  <br />
+  
+  [![Live Deployment](https://img.shields.io/badge/Live_Deployment-Render-%2346E3B7?style=for-the-badge&logo=render&logoColor=white)](https://smart-diagnosis-api-sdo9.onrender.com)
 </div>
 
 <br />
@@ -106,7 +110,8 @@ npm start
 
 ## 📖 API Documentation
 
-**Base API URL:** `http://localhost:5002`
+**Local API URL:** `http://localhost:5002`  
+**Live API URL:** `https://smart-diagnosis-api-sdo9.onrender.com`
 
 ### 1. Submit a Diagnosis
 #### `POST /api/diagnosis/diagnose`
