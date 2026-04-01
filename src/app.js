@@ -12,6 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to Smart Diagnosis API! Please use /health to check status or /api/diagnosis to use the API endpoints.' });
+});
 app.get('/health', (req, res) => {
     res.json({
         status: 'ok',
