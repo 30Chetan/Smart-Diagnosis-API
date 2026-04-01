@@ -13,7 +13,10 @@ export const createDiagnosis = async (req, res, next) => {
             });
         }
 
-        const result = await diagnosisService.analyzeSymptoms(symptoms.trim());
+        // Edge Case: Prevent identically oversized inputs to protect AI token limits
+        const safeSymptoms = symptoms.trim().substring(0, 500);
+
+        const result = await diagnosisService.analyzeSymptoms(safeSymptoms);
 
         return res.status(201).json({
             success: true,

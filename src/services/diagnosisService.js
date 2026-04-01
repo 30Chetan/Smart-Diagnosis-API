@@ -163,8 +163,9 @@ Required JSON structure:
     }
 
     async getHistory({ page = 1, limit = 10 } = {}) {
-        const pageNum  = Math.max(1, parseInt(page));
-        const limitNum = Math.min(100, Math.max(1, parseInt(limit))); // cap at 100
+        // Edge Case: Handle NaN errors if someone types ?page=abc
+        const pageNum  = Math.max(1, parseInt(page) || 1);
+        const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 10)); // cap at 100
         const skip     = (pageNum - 1) * limitNum;
 
         const [history, total] = await Promise.all([
