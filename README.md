@@ -193,8 +193,21 @@ Used seamlessly by platform load-balancers to confirm operational server health.
 
 ---
 
-## ☁️ Deployment Structure
-This API is designed specifically to be "push-and-deploy" ready for platforms like **Render**, **Railway**, or **Heroku**. 
-*   It explicitly binds to dynamically injected Environment variables via `process.env.PORT`. 
-*   It properly waits with asynchronous blocking via `startServer()` mapping the MongoDB Connection prior to ever allowing the HTTP Server to accept external traffic, ensuring total crash-loop prevention. 
-*   `npm start` correctly targets standard Node deployment architectures securely avoiding local `nodemon` instances.
+## ☁️ Deployment to Render.com
+
+This API has been containerized and architected specifically to be "push-and-deploy" ready for **Render**. It explicitly binds to dynamically injected Environment variables and utilizes asynchronous blocking to ensure the MongoDB connection is mapped prior to binding the HTTP server instance.
+
+### Render Setup Instructions
+
+1.  Connect your GitHub repository to a new **Web Service** on Render.
+2.  Set the **Build Command** to: `npm install`
+3.  Set the **Start Command** to: `npm start`
+4.  Navigate to the **Environment** tab and explicitly add the following variables:
+
+| Key | Value Description |
+| :--- | :--- |
+| `NODE_ENV` | Must be set EXACTLY to `production` |
+| `MONGO_URI` | Your live MongoDB Atlas connection string |
+| `GEMINI_API_KEY` | Your active Google AI Studio Key (Ensure it has access to gemini-2.5-flash) |
+
+*(Note: Do not define `PORT` in Render. It is securely assigned dynamically at runtime).*
